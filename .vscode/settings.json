@@ -1,0 +1,11 @@
+{
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.formatOnType": true,
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true
+  }
+}

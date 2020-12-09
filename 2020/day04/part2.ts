@@ -1,15 +1,6 @@
 import { readLines } from "https://deno.land/std/io/bufio.ts";
 
-const requiredFields = [
-  "byr",
-  "iyr",
-  "eyr",
-  "hgt",
-  "hcl",
-  "ecl",
-  "pid",
-  // 'cid',
-] as const;
+import { fieldPattern, requiredFields } from "./part1.ts";
 
 function inRange([min, max]: [number, number], value: string) {
   const number = Number(value);
@@ -39,27 +30,25 @@ const validators: Record<
   pid: (passportId) => /^[0-9]{9}$/.test(passportId),
 };
 
-const fieldPattern = /([a-z]{3}):(\S+)/g;
-
-let valid = 0;
-const currentPassport = new Map<string, string>();
-for await (const line of readLines(await Deno.open("./input.txt"))) {
-  if (line) {
-    for (const [, field, value] of line.matchAll(fieldPattern)) {
-      currentPassport.set(field, value);
-    }
-    continue;
-  }
-  if (
-    requiredFields.every((field) =>
-      validators[field](currentPassport.get(field) ?? "")
-    )
-  ) {
-    ++valid;
-  }
-  currentPassport.clear();
+export function validatePassport(passport: Map<string, string>) {
+  return requiredFields.every((field) =>
+    validators[field](passport.get(field) ?? "")
+  );
 }
 
-console.log(valid);
+if (import.meta.main) {
+  let valid = 0;
+  const currentPassport = new Map<string, string>();
+  for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (line) {
+      for (const [, field, value] of line.matchAll(fieldPattern)) {
+        currentPassport.set(field, value);
+      }
+      continue;
+    }
+    if (validatePassport(currentPassport)) valid++;
+    currentPassport.clear();
+  }
 
-export {};
+  console.log(valid);
+}

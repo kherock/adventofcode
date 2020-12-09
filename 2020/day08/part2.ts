@@ -1,6 +1,6 @@
-import { Directive, VirtualMachine } from "./VirtualMachine.ts";
+import { Directive, VirtualMachine } from "./part1.ts";
 
-class SpeculativeVirtualMachine extends VirtualMachine {
+export class SpeculativeVirtualMachine extends VirtualMachine {
   static fork(state: VirtualMachine): VirtualMachine {
     const vm = new VirtualMachine("");
     return Object.assign(vm, {
@@ -65,14 +65,16 @@ class SpeculativeVirtualMachine extends VirtualMachine {
   }
 }
 
-const vm = new SpeculativeVirtualMachine(await Deno.readTextFile("input.txt"));
+if (import.meta.main) {
+  const vm = new SpeculativeVirtualMachine(
+    await Deno.readTextFile("input.txt"),
+  );
 
-try {
-  while (!vm.step()) void 0;
-} catch (err) {
-  console.error(err.stack);
-} finally {
-  console.log(vm.firstHaltedVm?.accumulator);
+  try {
+    while (!vm.step()) void 0;
+  } catch (err) {
+    console.error(err.stack);
+  } finally {
+    console.log(vm.firstHaltedVm?.accumulator);
+  }
 }
-
-export {};

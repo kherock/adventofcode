@@ -1,6 +1,6 @@
 import { readLines } from "https://deno.land/std/io/bufio.ts";
 
-const requiredFields = [
+export const requiredFields = [
   "byr",
   "iyr",
   "eyr",
@@ -11,23 +11,25 @@ const requiredFields = [
   // 'cid',
 ] as const;
 
-const fieldPattern = /([a-z]{3}):(\S+)/g;
+export const fieldPattern = /([a-z]{3}):(\S+)/g;
 
-let valid = 0;
-const currentPassport = new Map<string, string>();
-for await (const line of readLines(await Deno.open("./input.txt"))) {
-  if (line) {
-    for (const [, field, value] of line.matchAll(fieldPattern)) {
-      currentPassport.set(field, value);
-    }
-  } else {
-    if (requiredFields.every((field) => currentPassport.has(field))) {
-      valid++;
-    }
-    currentPassport.clear();
-  }
+export function validatePassport(passport: Map<string, string>): boolean {
+  return requiredFields.every((field) => passport.has(field));
 }
 
-console.log(valid);
+if (import.meta.main) {
+  let valid = 0;
+  const currentPassport = new Map<string, string>();
+  for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (line) {
+      for (const [, field, value] of line.matchAll(fieldPattern)) {
+        currentPassport.set(field, value);
+      }
+    } else {
+      if (validatePassport(currentPassport)) valid++;
+      currentPassport.clear();
+    }
+  }
 
-export {};
+  console.log(valid);
+}

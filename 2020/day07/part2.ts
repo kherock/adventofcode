@@ -1,29 +1,24 @@
 import { readLines } from "https://deno.land/std/io/bufio.ts";
 
-const rules: Record<string, Map<string, number>> = {};
+import { parseBags } from "./part1.ts";
 
-const bagPattern = /(\d+) (\w+ \w+) bags?/;
-const linePattern = /^(.*) bags contain (?:no other bags|(.*)).$/;
-for await (const line of readLines(await Deno.open("./input.txt"))) {
-  const [, headBag, childBags] = line.match(linePattern)!;
-  rules[headBag] ??= new Map();
-  if (childBags) {
-    const nodes = childBags.split(", ").map((childBag) =>
-      childBag.match(bagPattern)!.slice(1)
-    );
-    for (const [count, bag] of nodes) {
-      rules[headBag].set(bag, Number(count));
+if (import.meta.main) {
+  const rules: Record<string, Map<string, number>> = {};
+
+  for await (const line of readLines(await Deno.open("input.txt"))) {
+    const { bag, children } = parseBags(line);
+    rules[bag] = new Map();
+    for (const child of children) {
+      rules[bag].set(child.bag, child.count);
     }
   }
-}
 
-const containers = ["shiny gold"];
-for (const node of containers) {
-  for (const [bag, count] of rules[node] ?? []) {
-    containers.push(...Array(count).fill(bag));
+  const containers = ["shiny gold"];
+  for (const node of containers) {
+    for (const [bag, count] of rules[node] ?? []) {
+      containers.push(...Array(count).fill(bag));
+    }
   }
+
+  console.log(containers.length - 1);
 }
-
-console.log(containers.length - 1);
-
-export {};

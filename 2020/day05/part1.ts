@@ -1,7 +1,6 @@
 import { readLines } from "https://deno.land/std/io/bufio.ts";
 
-let max = -1;
-for await (const line of readLines(await Deno.open("./input.txt"))) {
+export function toOrderedPair(line: string): [row: number, col: number] {
   let row = 0;
   for (let i = 0; i < 7; ++i) {
     const intervalLength = 2 ** (7 - i);
@@ -16,10 +15,19 @@ for await (const line of readLines(await Deno.open("./input.txt"))) {
       col += intervalLength / 2;
     }
   }
-  const seatId = 8 * row + col;
-  max = Math.max(max, seatId);
+  return [row, col];
 }
 
-console.log(max);
+export function toSeatId([row, col]: ReturnType<typeof toOrderedPair>): number {
+  return 8 * row + col;
+}
 
-export {};
+if (import.meta.main) {
+  let max = -1;
+  for await (const line of readLines(await Deno.open("input.txt"))) {
+    const seatId = toSeatId(toOrderedPair(line));
+    max = Math.max(max, seatId);
+  }
+
+  console.log(max);
+}

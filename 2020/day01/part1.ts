@@ -1,25 +1,33 @@
-const input = await Deno.readTextFile("input.txt");
-const numbers = input.split(/\s+/).map(Number).sort((a, b) => a - b);
+export function binomialSum(
+  target: number,
+  arr: number[],
+): [number, number] | void {
+  const numbers = [...arr].sort((a, b) => a - b);
+  let lIndex = 0;
+  let rIndex = numbers.length - 1;
 
-let lIndex = 0;
-let rIndex = numbers.length - 1;
-
-let sum: number;
-while (lIndex < rIndex) {
-  sum = numbers[lIndex] + numbers[rIndex];
-  if (sum < 2020) {
-    ++lIndex;
-  } else if (sum > 2020) {
-    --rIndex;
-  } else {
-    console.log(
-      `${numbers[lIndex]} * ${numbers[rIndex]} = ${numbers[lIndex] *
-        numbers[rIndex]}`,
-    );
-    Deno.exit(0);
+  let sum: number;
+  while (lIndex < rIndex) {
+    sum = numbers[lIndex] + numbers[rIndex];
+    if (sum < target) {
+      ++lIndex;
+    } else if (sum > target) {
+      --rIndex;
+    } else {
+      return [numbers[lIndex], numbers[rIndex]];
+    }
   }
 }
 
-Deno.exit(1);
+if (import.meta.main) {
+  const input = await Deno.readTextFile("input.txt");
+  const numbers = input.split(/\s+/).map(Number);
 
-export {};
+  const terms = binomialSum(2020, numbers);
+  if (!terms) {
+    Deno.exit(1);
+  }
+  console.log(
+    `${terms.join(" * ")} = ${terms.reduce((prev, curr) => prev * curr, 1)}`,
+  );
+}

@@ -1,4 +1,4 @@
-import { readLines } from "https://deno.land/std/io/bufio.ts";
+import { readLines } from "https://deno.land/std@0.80.0/io/bufio.ts";
 
 if (import.meta.main) {
   const currentForm = new Set<string>();

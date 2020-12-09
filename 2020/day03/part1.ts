@@ -1,4 +1,4 @@
-import { readLines } from "https://deno.land/std/io/bufio.ts";
+import { readLines } from "https://deno.land/std@0.80.0/io/bufio.ts";
 
 export interface Toboggan {
   readonly slope: [xDelta: number, yDelta: number];

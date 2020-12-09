@@ -1,4 +1,4 @@
-import { SEP } from "https://deno.land/std/path/mod.ts";
+import { SEP } from "https://deno.land/std@0.80.0/path/mod.ts";
 
 export enum Directive {
   ACC = "acc",

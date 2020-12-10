@@ -1,7 +1,7 @@
 export function trinomialSum(
   target: number,
   arr: number[],
-): [number, number, number] | void {
+): [number, number, number] | undefined {
   const numbers = [...arr].sort((a, b) => a - b);
   const remainders: Record<number, [number, number]> = Object.create(null);
   let sum: number;

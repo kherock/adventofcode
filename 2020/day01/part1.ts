@@ -1,7 +1,7 @@
 export function binomialSum(
   target: number,
   arr: number[],
-): [number, number] | void {
+): [number, number] | undefined {
   const numbers = [...arr].sort((a, b) => a - b);
   let lIndex = 0;
   let rIndex = numbers.length - 1;

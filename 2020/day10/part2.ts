@@ -1,4 +1,4 @@
-import { joltageChain } from "./part1.ts";
+import { computeJoltageChain } from "./part1.ts";
 
 /*
 
@@ -22,33 +22,34 @@ import { joltageChain } from "./part1.ts";
 
 */
 
-function joltagePermutations(n: number): number {
-  // n_k = n_(k-3) + n(k-2) + n_(k-1)
-  if (n < 0) {
+// n_k = n_(k-3) + n(k-2) + n_(k-1)
+export function joltagePermutations(k: number): number {
+  if (k < 0) {
     return 0;
   }
-  if (n === 0 || n === 1) {
+  if (k < 2) {
     return 1;
   }
-  return joltagePermutations(n - 3) +
-    joltagePermutations(n - 2) +
-    joltagePermutations(n - 1);
+  return joltagePermutations(k - 3) +
+    joltagePermutations(k - 2) +
+    joltagePermutations(k - 1);
 }
 
 if (import.meta.main) {
   const input = await Deno.readTextFile("input.txt");
-  const diffs = joltageChain(input.split("\n").map(Number));
+  const adapters = input.split("\n").map(Number);
 
-  const ones: number[] = [];
-  let cursor = diffs.indexOf(1);
-  while (cursor !== -1 && cursor < diffs.length) {
-    const rangeEnd = diffs.indexOf(3, cursor);
-    ones.push((rangeEnd === -1 ? diffs.length : rangeEnd) - cursor);
-    cursor = diffs.indexOf(1, rangeEnd);
-  }
-  console.log(
-    ones
-      .map((length) => joltagePermutations(length))
-      .reduce((acc, p) => acc * p, 1),
-  );
+  const arrangements = computeJoltageChain(adapters)
+    .reduce((acc, diff) => {
+      if (diff === 1) {
+        acc[acc.length - 1]++;
+      } else {
+        acc.push(0);
+      }
+      return acc;
+    }, [0] as number[])
+    .map((length) => joltagePermutations(length))
+    .reduce((acc, p) => acc * p, 1);
+
+  console.log(arrangements);
 }

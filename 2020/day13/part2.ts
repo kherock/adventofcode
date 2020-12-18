@@ -48,6 +48,7 @@ export function solveCongruences(congruences: Congruence[]): Congruence {
 }
 
 if (import.meta.main) {
+  const t0 = performance.now();
   const { buses } = parseNotes(await Deno.readTextFile("input.txt"));
 
   const congruences = buses
@@ -56,6 +57,8 @@ if (import.meta.main) {
 
   const { residue: crtResidue } = chineseRemainderTheorem(congruences);
   const { residue } = solveCongruences(congruences);
+  const t1 = performance.now();
+  console.info(`part2: ${(t1 - t0).toFixed(2)}ms`);
 
   // JS's floating point precision in large numbers is disappointing
   // CRT cannot be trusted

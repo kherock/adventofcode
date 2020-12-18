@@ -48,17 +48,20 @@ export function solveCongruences(congruences: Congruence[]): Congruence {
 }
 
 if (import.meta.main) {
-  const t0 = performance.now();
   const { buses } = parseNotes(await Deno.readTextFile("input.txt"));
 
+  const t0 = performance.now();
   const congruences = buses
     .map((loop, index) => ({ modulus: loop, residue: loop - index }))
     .filter(({ modulus }) => Number.isInteger(modulus));
 
-  const { residue: crtResidue } = chineseRemainderTheorem(congruences);
-  const { residue } = solveCongruences(congruences);
   const t1 = performance.now();
-  console.info(`part2: ${(t1 - t0).toFixed(2)}ms`);
+  const { residue: crtResidue } = chineseRemainderTheorem(congruences);
+  const t2 = performance.now();
+  const { residue } = solveCongruences(congruences);
+  const t3 = performance.now();
+  console.info(`CRT: ${((t2 - t0)).toFixed(3)}ms`);
+  console.info(`Substitution method: ${((t3 - t2 + t1 - t0)).toFixed(3)}ms`);
 
   // JS's floating point precision in large numbers is disappointing
   // CRT cannot be trusted

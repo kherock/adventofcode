@@ -1,4 +1,4 @@
-## --- Day 7: Handy Haversacks ---
+## \--- Day 7: Handy Haversacks ---
 
 You land at the regional airport in time for your next flight. In fact, it looks like you'll even have time to grab some food: all flights are currently delayed due to _issues in luggage processing_.
 
@@ -15,6 +15,7 @@ For example, consider the following rules:
     vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
     faded blue bags contain no other bags.
     dotted black bags contain no other bags.
+    
 
 These rules specify the required contents for 9 bag types. In this example, every `faded blue` bag is empty, every `vibrant plum` bag contains 11 bags (5 `faded blue` and 6 `dotted black`), and so on.
 
@@ -31,7 +32,7 @@ So, in this example, the number of bag colors that can eventually contain at lea
 
 _How many bag colors can eventually contain at least one `shiny gold` bag?_ (The list of rules is quite long; make sure you get all of it.)
 
-## --- Part Two ---
+## \--- Part Two ---
 
 It's getting pretty expensive to fly these days - not because of ticket prices, but because of the ridiculous number of bags you need to buy!
 
@@ -55,6 +56,7 @@ Here's another example:
     dark green bags contain 2 dark blue bags.
     dark blue bags contain 2 dark violet bags.
     dark violet bags contain no other bags.
+    
 
 In this example, a single `shiny gold` bag must contain `_126_` other bags.
 

@@ -1,4 +1,4 @@
-## --- Day 5: Binary Boarding ---
+## \--- Day 5: Binary Boarding ---
 
 You board your plane only to discover a new problem: you dropped your boarding pass! You aren't sure which seat is yours, and all of the flight attendants are busy with the flood of people that suddenly made it through passport control.
 
@@ -19,7 +19,7 @@ For example, consider just the first seven characters of `FBFBBFFRLR`:
 *   `F` keeps rows `44` through `45`.
 *   The final `F` keeps the lower of the two, _row `44`_.
 
-The last three characters will be either `L` or `R`; these specify exactly one of the _8 columns_ of seats on the plane (numbered `0` through `7`). The same process as above proceeds again, this time with only three steps. `L` means to keep the _lower half_, while `R` means to keep the _upper half_.
+The last three characters will be either `L` or `R`; these specify exactly one of the _8 columns_ of seats on the plane (numbered `0` through `7`). The same process as above proceeds again, this time with only three steps.  `L` means to keep the _lower half_, while `R` means to keep the _upper half_.
 
 For example, consider just the last 3 characters of `FBFBBFFRLR`:
 
@@ -40,11 +40,11 @@ Here are some other boarding passes:
 
 As a sanity check, look through your list of boarding passes. _What is the highest seat ID on a boarding pass?_
 
-## --- Part Two ---
+## \--- Part Two ---
 
 _Ding!_ The "fasten seat belt" signs have turned on. Time to find your seat.
 
-It's a completely full flight, so your seat should be the only missing boarding pass in your list. However, there's a catch: some of the seats at the very front and back of the plane don't exist on this aircraft, so they'll be missing from your list as well.
+It's a completely full flight, so your seat should be the only missing boarding pass in your list.  However, there's a catch: some of the seats at the very front and back of the plane don't exist on this aircraft, so they'll be missing from your list as well.
 
 Your seat wasn't at the very front or back, though; the seats with IDs +1 and -1 from yours will be in your list.
 

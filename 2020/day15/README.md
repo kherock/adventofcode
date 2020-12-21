@@ -1,4 +1,4 @@
-## --- Day 15: Rambunctious Recitation ---
+## \--- Day 15: Rambunctious Recitation ---
 
 You catch the airport shuttle and try to book a new flight to your vacation island. Due to the storm, all direct flights have been cancelled, but a route is available to get around the storm. You take it.
 
@@ -39,7 +39,7 @@ Here are a few more examples:
 
 Given your starting numbers, _what will be the `2020`th number spoken?_
 
-## --- Part Two ---
+## \--- Part Two ---
 
 Impressed, the Elves issue you a challenge: determine the `30000000`th number spoken. For example, given the same starting numbers as above:
 

@@ -1,4 +1,4 @@
-## --- Day 11: Seating System ---
+## \--- Day 11: Seating System ---
 
 Your plane lands with plenty of time to spare. The final leg of your journey is a ferry that goes directly to the tropical island where you can finally start your vacation. As you reach the waiting area to board the ferry, you realize you're so early, nobody else has even arrived yet!
 
@@ -16,6 +16,7 @@ The seat layout fits neatly on a grid. Each position is either floor (`.`), an e
     LLLLLLLLLL
     L.LLLLLL.L
     L.LLLLL.LL
+    
 
 Now, you just need to model the people who will be arriving shortly. Fortunately, people are entirely predictable and always follow a simple set of rules. All decisions are based on the _number of occupied seats_ adjacent to a given seat (one of the eight positions immediately up, down, left, right, or diagonal from the seat). The following rules are applied to every seat simultaneously:
 
@@ -23,7 +24,7 @@ Now, you just need to model the people who will be arriving shortly. Fortunately
 *   If a seat is _occupied_ (`#`) and _four or more_ seats adjacent to it are also occupied, the seat becomes _empty_.
 *   Otherwise, the seat's state does not change.
 
-<span title="Floor... floor never changes.">Floor (`.`) never changes</span>; seats don't move, and nobody sits on the floor.
+<span title="Floor... floor never changes.">Floor (<code>.</code>) never changes</span>; seats don't move, and nobody sits on the floor.
 
 After one round of these rules, every seat in the example layout becomes occupied:
 
@@ -37,6 +38,7 @@ After one round of these rules, every seat in the example layout becomes occupie
     ##########
     #.######.#
     #.#####.##
+    
 
 After a second round, the seats with four or more occupied adjacent seats become empty again:
 
@@ -50,6 +52,7 @@ After a second round, the seats with four or more occupied adjacent seats become
     #LLLLLLLL#
     #.LLLLLL.L
     #.#LLLL.##
+    
 
 This process continues for three more rounds:
 
@@ -63,6 +66,7 @@ This process continues for three more rounds:
     #L######L#
     #.LL###L.L
     #.#L###.##
+    
 
     #.#L.L#.##
     #LLL#LL.L#
@@ -74,6 +78,7 @@ This process continues for three more rounds:
     #L#LLLL#L#
     #.LLLLLL.L
     #.#L#L#.##
+    
 
     #.#L.L#.##
     #LLL#LL.L#
@@ -85,12 +90,13 @@ This process continues for three more rounds:
     #L#L##L#L#
     #.LLLLLL.L
     #.#L#L#.##
+    
 
 At this point, something interesting happens: the chaos stabilizes and further applications of these rules cause no seats to change state! Once people stop moving around, you count _`37`_ occupied seats.
 
 Simulate your seating area by applying the seating rules repeatedly until no seats change state. _How many seats end up occupied?_
 
-## --- Part Two ---
+## \--- Part Two ---
 
 As soon as people start to arrive, you realize your mistake. People don't just care about adjacent seats - they care about _the first seat they can see_ in each of those eight directions!
 
@@ -105,12 +111,14 @@ Now, instead of considering just the eight immediately adjacent seats, consider 
     .........
     #........
     ...#.....
+    
 
 The leftmost empty seat below would only see _one_ empty seat, but cannot see any of the occupied ones:
 
     .............
     .L.L.#.#.#.#.
     .............
+    
 
 The empty seat below would see _no_ occupied seats:
 
@@ -121,6 +129,7 @@ The empty seat below would see _no_ occupied seats:
     ##...##
     #.#.#.#
     .##.##.
+    
 
 Also, people seem to be more tolerant than you expected: it now takes _five or more_ visible occupied seats for an occupied seat to become empty (rather than _four or more_ from the previous rules). The other rules still apply: empty seats that see no occupied seats become occupied, seats matching no rule don't change, and floor never changes.
 
@@ -136,6 +145,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     LLLLLLLLLL
     L.LLLLLL.L
     L.LLLLL.LL
+    
 
     #.##.##.##
     #######.##
@@ -147,6 +157,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     ##########
     #.######.#
     #.#####.##
+    
 
     #.LL.LL.L#
     #LLLLLL.LL
@@ -158,6 +169,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     LLLLLLLLL#
     #.LLLLLL.L
     #.LLLLL.L#
+    
 
     #.L#.##.L#
     #L#####.LL
@@ -169,6 +181,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     LLL####LL#
     #.L#####.L
     #.L####.L#
+    
 
     #.L#.L#.L#
     #LLLLLL.LL
@@ -180,6 +193,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     LLLLLLLLL#
     #.LLLLL#.L
     #.L#LL#.L#
+    
 
     #.L#.L#.L#
     #LLLLLL.LL
@@ -191,6 +205,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     LLL###LLL#
     #.LLLLL#.L
     #.L#LL#.L#
+    
 
     #.L#.L#.L#
     #LLLLLL.LL
@@ -202,6 +217,7 @@ Given the same starting layout as above, these new rules cause the seating area 
     LLL###LLL#
     #.LLLLL#.L
     #.L#LL#.L#
+    
 
 Again, at this point, people stop shifting around and the seating area reaches equilibrium. Once this occurs, you count _`26`_ occupied seats.
 

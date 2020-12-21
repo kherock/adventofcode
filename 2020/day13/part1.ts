@@ -12,9 +12,9 @@ export function getDepartureAfter(time: number, loopTime: number) {
   return loopTime * Math.ceil(time / loopTime) - time;
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   const { departureTime, buses } = parseNotes(
-    await Deno.readTextFile("input.txt"),
+    await Deno.readTextFile(inputPath),
   );
 
   const sorted = buses
@@ -26,3 +26,5 @@ if (import.meta.main) {
     sorted[0] * (getDepartureAfter(departureTime, sorted[0])),
   );
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

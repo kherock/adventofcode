@@ -30,8 +30,8 @@ export function inRanges(ranges: Rule["ranges"], value: number): boolean {
   return ranges.some(([start, end]) => start <= value && value <= end);
 }
 
-if (import.meta.main) {
-  const notes = readLines(await Deno.open("input.txt"));
+export async function main(inputPath: string | URL): Promise<void> {
+  const notes = readLines(await Deno.open(inputPath));
   const rules: Rule[] = [];
 
   let mode = ParseMode.RULES;
@@ -60,3 +60,5 @@ if (import.meta.main) {
   }
   console.log(errorRate);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

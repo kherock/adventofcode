@@ -9,13 +9,13 @@ export function applyMask(mask: Mask, value: number): number {
   return Number(BigInt(value) & BigInt(mask.AND) | BigInt(mask.OR));
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   const mask: Mask = {
     AND: 2 ** 36 - 1,
     OR: 0,
   };
   const mem = new Map<number, number>();
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     let match;
     if ((match = line.match(maskPattern))) {
       mask.AND = Number.parseInt(match[1].replaceAll("X", "1"), 2);
@@ -30,3 +30,5 @@ if (import.meta.main) {
     [...mem.values()].reduce((sum, value) => sum + value, 0).toString(),
   );
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

@@ -35,8 +35,8 @@ export function joltagePermutations(k: number): number {
     joltagePermutations(k - 1);
 }
 
-if (import.meta.main) {
-  const input = await Deno.readTextFile("input.txt");
+export async function main(inputPath: string | URL): Promise<void> {
+  const input = await Deno.readTextFile(inputPath);
   const adapters = input.split("\n").filter(Boolean).map(Number);
 
   const arrangements = computeJoltageChain(adapters)
@@ -53,3 +53,5 @@ if (import.meta.main) {
 
   console.log(arrangements);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

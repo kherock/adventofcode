@@ -17,10 +17,10 @@ export function validatePassport(passport: Map<string, string>): boolean {
   return requiredFields.every((field) => passport.has(field));
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   let valid = 0;
   const currentPassport = new Map<string, string>();
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (line) {
       for (const [, field, value] of line.matchAll(fieldPattern)) {
         currentPassport.set(field, value);
@@ -33,3 +33,5 @@ if (import.meta.main) {
 
   console.log(valid);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

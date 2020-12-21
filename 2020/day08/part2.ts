@@ -65,10 +65,8 @@ export class SpeculativeVirtualMachine extends VirtualMachine {
   }
 }
 
-if (import.meta.main) {
-  const vm = new SpeculativeVirtualMachine(
-    await Deno.readTextFile("input.txt"),
-  );
+export async function main(inputPath: string | URL): Promise<void> {
+  const vm = new SpeculativeVirtualMachine(await Deno.readTextFile(inputPath));
 
   try {
     while (!vm.step()) void 0;
@@ -78,3 +76,5 @@ if (import.meta.main) {
     console.log(vm.firstHaltedVm?.accumulator);
   }
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

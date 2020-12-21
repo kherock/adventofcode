@@ -52,11 +52,13 @@ export class Simulation {
   }
 }
 
-if (import.meta.main) {
-  const input = await Deno.readTextFile("input.txt");
+export async function main(inputPath: string | URL): Promise<void> {
+  const input = await Deno.readTextFile(inputPath);
   const simulation = new Simulation(input.split("\n").filter(Boolean)).run();
   let value: string[];
   let done: boolean | undefined;
   do ({ value, done } = simulation.next()); while (!done);
   console.log([...value.join("").matchAll(/#/g)].length);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

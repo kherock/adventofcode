@@ -7,8 +7,7 @@ just what ended up working first ¯\\\_(ツ)\_/¯.
 To run:
 
 ```console
-$ cd dayXX
-$ deno run --allow-read partY.ts
+$ ./run.sh exec $n # for n in {1..25}
 ```
 
 To test:

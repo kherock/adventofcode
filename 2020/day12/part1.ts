@@ -41,11 +41,11 @@ export function rotate(
 
 export const linePattern = /^([NSEWLRF])(\d+)$/;
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   let position: [number, number] = [0, 0];
   let theta = orientations.E;
 
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     const [, direction, distance] = line.match(linePattern)!;
     const value = Number(distance);
@@ -76,3 +76,5 @@ if (import.meta.main) {
 
   console.log(Math.abs(position[0]) + Math.abs(position[1]));
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

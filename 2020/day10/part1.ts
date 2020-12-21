@@ -9,8 +9,8 @@ export function computeJoltageChain(adapters: number[]): number[] {
     .map((rating, idx) => rating - sortedRatings[idx]);
 }
 
-if (import.meta.main) {
-  const input = await Deno.readTextFile("input.txt");
+export async function main(inputPath: string | URL): Promise<void> {
+  const input = await Deno.readTextFile(inputPath);
   const adapters = input.split("\n").filter(Boolean).map(Number);
 
   const counts = computeJoltageChain(adapters)
@@ -21,3 +21,5 @@ if (import.meta.main) {
     `${counts[0]} * ${counts[2]} = ${counts[0] * counts[2]}`,
   );
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

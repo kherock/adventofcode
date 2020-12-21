@@ -59,8 +59,8 @@ export class VirtualMachine {
   }
 }
 
-if (import.meta.main) {
-  const vm = new VirtualMachine(await Deno.readTextFile("input.txt"));
+export async function main(inputPath: string | URL): Promise<void> {
+  const vm = new VirtualMachine(await Deno.readTextFile(inputPath));
 
   try {
     while (!vm.step()) {
@@ -74,3 +74,5 @@ if (import.meta.main) {
     console.log(vm.accumulator);
   }
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

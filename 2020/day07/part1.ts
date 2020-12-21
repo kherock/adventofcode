@@ -18,10 +18,10 @@ export function parseBags(
   };
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   const rules: Record<string, Set<string>> = {};
 
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     const { bag, children } = parseBags(line);
     for (const child of children) {
@@ -39,3 +39,5 @@ if (import.meta.main) {
 
   console.log(containers.size - 1);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

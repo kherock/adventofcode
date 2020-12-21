@@ -2,11 +2,11 @@ import { readLines } from "https://deno.land/std@0.80.0/io/bufio.ts";
 
 import { add, dotProduct, linePattern, orientations, rotate } from "./part1.ts";
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   let position: [number, number] = [0, 0];
   let waypoint: [number, number] = [10, 1];
 
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     const [, direction, distance] = line.match(linePattern)!;
     const value = Number(distance);
@@ -34,3 +34,5 @@ if (import.meta.main) {
 
   console.log(Math.abs(position[0]) + Math.abs(position[1]));
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

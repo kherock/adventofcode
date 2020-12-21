@@ -47,8 +47,10 @@ export function solveCongruences(congruences: Congruence[]): Congruence {
   }, { modulus: 1, residue: 0 });
 }
 
-if (import.meta.main) {
-  const { buses } = parseNotes(await Deno.readTextFile("input.txt"));
+export async function main(inputPath: string | URL): Promise<void> {
+  const { buses } = parseNotes(
+    await Deno.readTextFile(inputPath),
+  );
 
   const t0 = performance.now();
   const congruences = buses
@@ -68,3 +70,5 @@ if (import.meta.main) {
   assertEquals(crtResidue, residue);
   console.log(residue);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

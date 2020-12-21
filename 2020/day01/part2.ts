@@ -35,8 +35,8 @@ export function trinomialSum(
   }
 }
 
-if (import.meta.main) {
-  const input = await Deno.readTextFile("input.txt");
+export async function main(inputPath: string | URL): Promise<void> {
+  const input = await Deno.readTextFile(inputPath);
   const numbers = input.split(/\s+/).filter(Boolean).map(Number);
 
   const terms = trinomialSum(2020, numbers);
@@ -47,3 +47,5 @@ if (import.meta.main) {
     `${terms.join(" * ")} = ${terms.reduce((prev, curr) => prev * curr, 1)}`,
   );
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

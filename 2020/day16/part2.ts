@@ -18,8 +18,8 @@ export function* markInvalid(
   }
 }
 
-if (import.meta.main) {
-  const notes = readLines(await Deno.open("input.txt"));
+export async function main(inputPath: string | URL): Promise<void> {
+  const notes = readLines(await Deno.open(inputPath));
   const rules: Rule[] = [];
   const decoder = new Map<string, Set<number>>();
   const myTicket: number[] = [];
@@ -68,3 +68,5 @@ if (import.meta.main) {
   }, 1);
   console.log(departureProduct);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

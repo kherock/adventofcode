@@ -2,10 +2,10 @@ import { readLines } from "https://deno.land/std@0.80.0/io/bufio.ts";
 
 import { initializeWindow } from "./part1.ts";
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   const target = 675280050;
 
-  const input = readLines(await Deno.open("input.txt"));
+  const input = readLines(await Deno.open(inputPath));
   const window = await initializeWindow(2, input);
 
   while (window[window.length - 1] < target) {
@@ -30,3 +30,5 @@ if (import.meta.main) {
 
   Deno.exit(1);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

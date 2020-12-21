@@ -8,12 +8,14 @@ export function validatePassword(line: string): boolean {
     Number(password[Number(idx2) - 1] === letter));
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   let valid = 0;
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     if (validatePassword(line)) valid++;
   }
 
   console.log(valid);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

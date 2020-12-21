@@ -15,13 +15,15 @@ export function stepToboggan(toboggan: Toboggan, line: string): void {
   toboggan.y++;
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   const toboggan: Toboggan = { slope: [3, 1], x: 0, y: 0, trees: 0 };
 
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     stepToboggan(toboggan, line);
   }
 
   console.log(toboggan.trees);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

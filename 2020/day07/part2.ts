@@ -2,10 +2,10 @@ import { readLines } from "https://deno.land/std@0.80.0/io/bufio.ts";
 
 import { parseBags } from "./part1.ts";
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   const rules: Record<string, Map<string, number>> = {};
 
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     const { bag, children } = parseBags(line);
     rules[bag] = new Map();
@@ -23,3 +23,5 @@ if (import.meta.main) {
 
   console.log(containers.length - 1);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

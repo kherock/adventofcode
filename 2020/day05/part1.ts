@@ -22,9 +22,9 @@ export function toSeatId([row, col]: ReturnType<typeof toOrderedPair>): number {
   return 8 * row + col;
 }
 
-if (import.meta.main) {
+export async function main(inputPath: string | URL): Promise<void> {
   let max = -1;
-  for await (const line of readLines(await Deno.open("input.txt"))) {
+  for await (const line of readLines(await Deno.open(inputPath))) {
     if (!line) continue;
     const seatId = toSeatId(toOrderedPair(line));
     max = Math.max(max, seatId);
@@ -32,3 +32,5 @@ if (import.meta.main) {
 
   console.log(max);
 }
+
+if (import.meta.main) await main(new URL("input.txt", import.meta.url));

@@ -37,7 +37,7 @@ if (import.meta.main) {
   let mode = ParseMode.RULES;
   let errorRate = 0;
   for await (const line of notes) {
-    if (line === "") {
+    if (!line) {
       mode++;
       await notes.next();
       continue;

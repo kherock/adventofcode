@@ -7,6 +7,7 @@ if (import.meta.main) {
   let waypoint: [number, number] = [10, 1];
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     const [, direction, distance] = line.match(linePattern)!;
     const value = Number(distance);
     switch (direction) {

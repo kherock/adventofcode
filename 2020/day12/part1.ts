@@ -46,6 +46,7 @@ if (import.meta.main) {
   let theta = orientations.E;
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     const [, direction, distance] = line.match(linePattern)!;
     const value = Number(distance);
     switch (direction) {

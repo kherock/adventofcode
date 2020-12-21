@@ -21,7 +21,7 @@ export function binomialSum(
 
 if (import.meta.main) {
   const input = await Deno.readTextFile("input.txt");
-  const numbers = input.split(/\s+/).map(Number);
+  const numbers = input.split(/\s+/).filter(Boolean).map(Number);
 
   const terms = binomialSum(2020, numbers);
   if (!terms) {

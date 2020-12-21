@@ -11,7 +11,7 @@ export function computeJoltageChain(adapters: number[]): number[] {
 
 if (import.meta.main) {
   const input = await Deno.readTextFile("input.txt");
-  const adapters = input.split("\n").map(Number);
+  const adapters = input.split("\n").filter(Boolean).map(Number);
 
   const counts = computeJoltageChain(adapters)
     .sort((a, b) => a - b)

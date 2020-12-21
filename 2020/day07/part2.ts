@@ -6,6 +6,7 @@ if (import.meta.main) {
   const rules: Record<string, Map<string, number>> = {};
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     const { bag, children } = parseBags(line);
     rules[bag] = new Map();
     for (const child of children) {

@@ -22,6 +22,7 @@ if (import.meta.main) {
   const rules: Record<string, Set<string>> = {};
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     const { bag, children } = parseBags(line);
     for (const child of children) {
       rules[child.bag] ??= new Set();

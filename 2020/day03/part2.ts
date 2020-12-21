@@ -12,6 +12,7 @@ if (import.meta.main) {
   ];
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     for (const toboggan of toboggans) {
       stepToboggan(toboggan, line);
     }

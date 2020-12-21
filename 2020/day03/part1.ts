@@ -19,6 +19,7 @@ if (import.meta.main) {
   const toboggan: Toboggan = { slope: [3, 1], x: 0, y: 0, trees: 0 };
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     stepToboggan(toboggan, line);
   }
 

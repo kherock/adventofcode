@@ -54,7 +54,7 @@ export class Simulation {
 
 if (import.meta.main) {
   const input = await Deno.readTextFile("input.txt");
-  const simulation = new Simulation(input.split("\n")).run();
+  const simulation = new Simulation(input.split("\n").filter(Boolean)).run();
   let value: string[];
   let done: boolean | undefined;
   do ({ value, done } = simulation.next()); while (!done);

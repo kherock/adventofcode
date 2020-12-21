@@ -19,6 +19,7 @@ if (import.meta.main) {
   const window = await initializeWindow(25, input);
 
   for await (const line of input) {
+    if (!line) continue;
     const number = Number(line);
 
     if (!binomialSum(number, window)) {

@@ -26,7 +26,7 @@ if (import.meta.main) {
 
   let mode = ParseMode.RULES;
   for await (const line of notes) {
-    if (line === "") {
+    if (!line) {
       if (mode++ === ParseMode.RULES) {
         for (const rule of rules) {
           decoder.set(rule.name, new Set(Array(rules.length).keys()));

@@ -11,6 +11,7 @@ export function validatePassword(line: string): boolean {
 if (import.meta.main) {
   let valid = 0;
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     if (validatePassword(line)) valid++;
   }
 

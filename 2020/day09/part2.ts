@@ -21,7 +21,8 @@ if (import.meta.main) {
     }
     if (sum < target) {
       const { value } = await input.next();
-      window.push(Number(value));
+      if (!value) continue;
+      value.push(Number(value));
     } else if (sum > target) {
       window.shift();
     }

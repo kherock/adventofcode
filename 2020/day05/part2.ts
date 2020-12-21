@@ -6,6 +6,7 @@ if (import.meta.main) {
   const seats: "X"[][] = [];
 
   for await (const line of readLines(await Deno.open("input.txt"))) {
+    if (!line) continue;
     const [row, col] = toOrderedPair(line);
     seats[row] ??= [];
     seats[row][col] = "X";

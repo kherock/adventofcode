@@ -37,7 +37,7 @@ export function joltagePermutations(k: number): number {
 
 if (import.meta.main) {
   const input = await Deno.readTextFile("input.txt");
-  const adapters = input.split("\n").map(Number);
+  const adapters = input.split("\n").filter(Boolean).map(Number);
 
   const arrangements = computeJoltageChain(adapters)
     .reduce((acc, diff) => {
